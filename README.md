@@ -8,7 +8,13 @@ Quick and easy CLI tool to compare 2 Dosbox DRO v2 files.
 
 This tool compares the headers, as well as any commands send to the registers.
 
-Optionally it can discard any delays in the songs. This is usefull if you want to compare 2 different recordings, since small millisecond differences can occur in delays between the recording. The exact cause of these delays differences is hard to pinpoint, but is assumed to be mainly because Dosbox and derivatives are not cycle-accurate ([source](https://dosbox-x.com/wiki/Guide%3ACPU-settings-in-DOSBox%E2%80%90X#_is_dosbox_x_cycle_accurate)).
+### Remove delays
+Optionally it can discard any delays in the songs. This is usefull if you want to compare 2 different recordings, since small millisecond differences can occur in delays between the recording. 
+
+`dro_compare -r example_files/0.dro example_files/1.dro`
+
+### Match only total sum of delays
+This will add up any delays found in the recording, and validate if the total match. For example `2x1ms` delay would still match a `1x2ms` delay. Note that this does not guarantee 100% correctness of timing within the recording, just that the **same amount** of delays are there across the song.
 
 `dro_compare -d example_files/0.dro example_files/1.dro`
 
@@ -21,7 +27,7 @@ and it should be installed in /usr/local/bin
 
 ## FAQ
 ### Why not use a simple file compare tool?
-Small millisecond delays show up in the file as command/value pairs, but not always at the same location or exact duration, so comparing them is hard.
+Small millisecond delays show up in the file as command/value pairs, but not always at the same location or exact duration, so comparing them is hard. The exact cause of these delays differences is hard to pinpoint, but is assumed to be mainly because Dosbox and derivatives are not cycle-accurate ([source](https://dosbox-x.com/wiki/Guide%3ACPU-settings-in-DOSBox%E2%80%90X#_is_dosbox_x_cycle_accurate)).
 
 ### Why not compare the 2 audio output streams?
 Dosbox is not 100% accurate in it's emulation, so small discrepancies can sneak into an audio recording, throwing off most comparison techniques. For example taking recording `0.wav` and `1.wav` from the `example_files` folder and comparing them shows minute differences. You won't hear them even with the best audio equipment, but they are there, sometimes differences as small as a few samples/milliseconds. This is not just from the start of the actual recording, which can vary in the bit of silence in between, but also during the song these small differences are observed.
