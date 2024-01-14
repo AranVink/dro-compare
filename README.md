@@ -4,23 +4,28 @@ Compare Dosbox DRO v2 files
 Quick and easy CLI tool to compare 2 Dosbox DRO v2 files.
 
 ## Example usage
-`dro_compare example_files/0.dro example_files/1.dro`
-
+```bash
+dro_compare example_files/0.dro example_files/1.dro
+```
 This tool compares the headers, as well as any commands send to the registers.
 
 ### Remove delays
 Optionally it can discard any delays in the songs. This is usefull if you want to compare 2 different recordings, since small millisecond differences can occur in delays between the recording. 
 
-`dro_compare -r example_files/0.dro example_files/1.dro`
+```bash
+dro_compare -r example_files/0.dro example_files/1.dro
+```
 
 ### Match only total sum of delays
 This will add up any delays found in the recording, and validate if the total match. For example `2x1ms` delay would still match a `1x2ms` delay. Note that this does not guarantee 100% correctness of timing within the recording, just that the **same amount** of delays are there across the song.
 
-`dro_compare -d example_files/0.dro example_files/1.dro`
+```bash
+dro_compare -d example_files/0.dro example_files/1.dro
+```
 
 ## Compiling
 Only Linux, GCC and some standard C libraries are required. Simply run:
-```
+```bash
 make install
 ```
 and it should be installed in /usr/local/bin
@@ -37,4 +42,4 @@ I've tried many different approaches to try and match the audio, with *NO* succe
 Importing 2 audio waveforms, truncating the silence at the start, inverting the second waveform and then listening to the result. In a 100% duplicate recording the net result should be complete silence, since these 2 waveforms cancel each other out.
 
 #### [DeltaWave Audio Null Comparator](https://deltaw.org/)
-This tool can compare audio , correct for level differences, phase correction, clock drift correction etc.
+This tool can compare audio , correct for level differences, phase correction, clock drift correction etc. Also this tool reports the recording are not the same.
