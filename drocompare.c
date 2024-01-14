@@ -129,8 +129,8 @@ int compare_dro_files(const char *file_path1, const char *file_path2, bool match
     printf("File 2 Delays: %u\n", dataArray2.iTotalDelayLength);
 
     // Compare data pairs
-    if (dataArray1.iLengthPairs != dataArray2.iLengthPairs) {
-        printf("DRO files have different lengths.\n");
+    if (!match_delays && (dataArray1.iLengthPairs != dataArray2.iLengthPairs)) {
+        printf("DRO files have different length of pairs.\n");
         free(dataArray1.dataPairs);
         free(dataArray2.dataPairs);
         return 1; // Return an error code
@@ -174,6 +174,7 @@ int main(int argc, char *argv[]) {
                 removeDelays = true;
                 break;
             case 'm':
+                removeDelays = true;
                 matchDelays = true;
                 break;
             default:

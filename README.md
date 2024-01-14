@@ -7,7 +7,7 @@ Quick and easy CLI tool to compare 2 Dosbox DRO v2 files.
 ```bash
 dro_compare example_files/0.dro example_files/1.dro
 ```
-This tool compares the headers, as well as any commands send to the registers.
+This tool compares the headers, as well as any commands send to the registers. It has optional handling of delays (see below). If no arguments are specified it goes through the file, matching every command and value send to the registers.
 
 ### Remove delays
 Optionally it can discard any delays in the songs. This is usefull if you want to compare 2 different recordings, since small millisecond differences can occur in delays between the recording. 
@@ -20,7 +20,7 @@ dro_compare -r example_files/0.dro example_files/1.dro
 This will add up any delays found in the recording, and validate if the total match. For example `2x1ms` delay would still match a `1x2ms` delay. Note that this does not guarantee 100% correctness of timing within the recording, just that the **same amount** of delays are there across the song.
 
 ```bash
-dro_compare -d example_files/0.dro example_files/1.dro
+dro_compare -m example_files/0.dro example_files/1.dro
 ```
 
 ## Compiling
